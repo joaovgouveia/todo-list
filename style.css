@@ -55,7 +55,7 @@ form button:hover {
 .todo {
     margin: 0.5rem;
     background: white;
-    color: #320773;
+    color: black;
     font-size: 1.25rem;
     display: flex;
     justify-content: space-between;
@@ -76,4 +76,12 @@ form button:hover {
 }
 .check-btn {
     background: #93E70F;
+}
+.todo-item {
+    padding: 0rem 0.5rem;
+}
+
+.fa-trash,
+.fa-check {
+    pointer-events: none;
 }
