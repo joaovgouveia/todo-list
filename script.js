@@ -70,9 +70,14 @@ function DeleteComplete(e) {
     //Complete TODO
     if(target.classList[0] === "check-btn") {
         const todo = target.parentElement;
-        todo.classList.toggle("completed");
 
-        RemoveFromLocalTodos(todo);
+        if(todo.classList.contains("completed")){
+            SaveLocalTodos(todo.children[0].innerText);
+        } else {
+            RemoveFromLocalTodos(todo);
+        }
+
+        todo.classList.toggle("completed");
     }
 }
 
