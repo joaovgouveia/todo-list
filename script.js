@@ -2,10 +2,12 @@
 const todoInput = document.querySelector('.todo-input');
 const todoButton = document.querySelector('.todo-button');
 const todoList = document.querySelector('.todo-list');
+const filterOption = document.querySelector('.filter-todo');
 
 //Event Listeners
 todoButton.addEventListener('click', AddTodo);
 todoList.addEventListener('click', DeleteComplete);
+filterOption.addEventListener('click', FilterTodos);
 
 //Functions
 function AddTodo(event){
@@ -49,12 +51,47 @@ function DeleteComplete(e) {
     //Delete TODO
     if(target.classList[0] === "delete-btn") {
         const todo = target.parentElement;
-        todo.remove();
+
+        //Animation
+        todo.classList.add("fall");
+
+        //Remove TODO
+        todo.addEventListener("transitionend", function(){
+            todo.remove();
+        })
     }
 
-    //Complet TODO
+    //Complete TODO
     if(target.classList[0] === "check-btn") {
         const todo = target.parentElement;
-        todo.classList.toggle("complete");
+        todo.classList.toggle("completed");
     }
+}
+
+function FilterTodos(e) {
+    const todos = todoList.childNodes;
+    console.log(todos);
+    
+    todos.forEach(function(todo){
+        switch(e.target.value) {
+            case "all":
+                todo.style.display = 'flex';
+                break;
+
+            case "completed":
+                if(todo.classList.contains('completed')){
+                    todo.style.display = 'flex';
+                } else {
+                    todo.style.display = 'none';
+                }
+            break
+
+            case "uncompleted":
+                if(todo.classList.contains('completed')){
+                    todo.style.display = 'none';
+                } else {
+                    todo.style.display = 'flex';
+                }
+        }
+    });
 }
